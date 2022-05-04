@@ -35,7 +35,6 @@ public class BranchOfficeDB {
                         try (Connection connection = connectionFactory.newConnection()) {
                             Channel channel = connection.createChannel();
                             channel.queueDeclare(QUEUE_NAME + Integer.toString(DBNumber), false, false, false, null);
-
                             channel.basicPublish("", QUEUE_NAME + Integer.toString(DBNumber), null, message.getBytes());
                             System.out.println(" [x] sent '" + message + "' at " + LocalDateTime.now().toString());
                             service.updateSyncedProducts(productList);
@@ -47,6 +46,6 @@ public class BranchOfficeDB {
             }
         };
         Timer timer = new Timer("Sync");
-        timer.schedule(task,0, 60*1000L);
+        timer.schedule(task,0, 1000L);
     }
 }

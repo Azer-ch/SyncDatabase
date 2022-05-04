@@ -12,7 +12,7 @@ public class DAOService {
     public String user = "azer";
     public String password = "azer2000";
     public String queryGet="SELECT * FROM product_sale where synchd = 0";
-    public String queryUpdate = "UPDATE product_sale set synchd = 1 where id = ?";
+    public String queryUpdate = "UPDATE product_sale set synchd = 1  where id = ?";
     public DAOService(int DBNumber) {
         this.DBNumber = DBNumber;
         this.url ="jdbc:mysql://localhost:3306/bo"+Integer.toString(DBNumber);
@@ -36,6 +36,7 @@ public class DAOService {
                 product.setTax(rs.getFloat("tax"));
                 product.setTotal(rs.getDouble("total"));
                 product.setDbNumber(DBNumber);
+                product.setUpdated(rs.getInt("updated"));
                 products.add(product);
             }
 
